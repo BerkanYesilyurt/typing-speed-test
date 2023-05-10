@@ -15,10 +15,13 @@
                 <p class="col-md-8 fs-4">Want to know how to improve your typing speed? The first step to learn to type fast and increase your typing speed is to take a timed typing test!</p>
 
                 <div class="row g-0 text-center p-2 mb-4" style="background-color: #ced4da">
-                  <div class="col-sm-6 col-md-12 display-6">Keywords</div>
+                  <div class="col-sm-6 col-md-12 display-6 p-3">
+                    <span class="m-lg-2" v-for="(word,key) in words" :key="key" v-bind:class="key!==0 || checkWrittenWord">
+                      {{word}}
+                    </span></div>
                 </div>
 
-                <input class="form-control form-control-lg mb-4" type="text" placeholder=".form-control-lg" aria-label=".form-control-lg example">
+                <input class="form-control form-control-lg mb-4" type="text" placeholder="Start typing the words above..." v-model="writtenWord">
               </div>
           </div>
         </div>
@@ -35,9 +38,8 @@
         </div>
         <div class="col-md-6">
           <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-            <h2>Add borders</h2>
-            <p>Or, keep it light and add a border for some added definition to the boundaries of your content. Be sure to look under the hood at the source HTML here as we've adjusted the alignment and sizing of both column's content for equal-height.</p>
-            <button class="btn btn-outline-secondary" type="button">Example button</button>
+            <h2>Results</h2>
+            <p><!-- TODO: Results --></p>
           </div>
         </div>
       </div>
@@ -50,10 +52,40 @@
 
 <script>
 export default {
-  name: 'MainPage'
+  data () {
+    return {
+      words: ['word', 'test', 'third'],
+      writtenWord: null,
+      trueCount: 0,
+      falseCount: 0,
+      isCorrect: true
+    }
+  },
+  watch: {
+    writtenWord (value) {
+      const trueWord = this.words[0].slice(0, value.length)
+      this.isCorrect = trueWord === value.replace(' ', '')
+
+      if (value.indexOf(' ') !== -1) {
+        this.isCorrect ? this.trueCount++ : this.falseCount++
+        this.words.splice(0, 1)
+        this.writtenWord = ''
+      }
+    }
+  },
+  computed: {
+    checkWrittenWord () {
+      return this.isCorrect ? 'selected-word fw-semibold' : 'selected-word fw-semibold bg-danger'
+    }
+  }
+
 }
 </script>
 
 <style scoped>
-
+.selected-word{
+  padding: 5px;
+  border-radius: 5px;
+  background-color: rgb(222,184,135);
+}
 </style>
