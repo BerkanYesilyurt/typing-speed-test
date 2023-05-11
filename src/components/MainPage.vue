@@ -14,14 +14,22 @@
                 <h1 class="display-5 fw-bold">Test your typing skills!</h1>
                 <p class="col-md-8 fs-4">Want to know how to improve your typing speed? The first step to learn to type fast and increase your typing speed is to take a timed typing test!</p>
 
+                <div v-if="!isFinished">
                 <div class="row g-0 text-center p-2 mb-4" style="background-color: #ced4da">
                   <div class="col-sm-6 col-md-12 display-6 p-3">
-                    <span class="m-lg-2" v-for="(word,key) in words" :key="key" v-bind:class="key!==0 || checkWrittenWord">
+                    <span class="m-lg-2" v-for="(word,key) in words.filter((data, index) => index<7)" :key="key" v-bind:class="key!==0 || checkWrittenWord">
                       {{word}}
                     </span></div>
                 </div>
-
-                <input class="form-control form-control-lg mb-4" type="text" placeholder="Start typing the words above..." v-model="writtenWord">
+                <div class="input-group">
+                <input class="form-control form-control-lg" type="text" placeholder="Start typing the words above..." v-model="writtenWord">
+                  <span class="input-group-text">{{timer}} seconds</span>
+                  <button :disabled="this.isStarted" type="button" class="input-group-lg btn btn-primary" @click="setWords">Reload</button>
+                </div>
+                </div>
+                <div v-else>
+                  <button type="button" class="btn btn-primary btn-lg">Start A New Test!</button>
+                </div>
               </div>
           </div>
         </div>
@@ -39,7 +47,13 @@
         <div class="col-md-6">
           <div class="h-100 p-5 bg-body-tertiary border rounded-3">
             <h2>Results</h2>
-            <p><!-- TODO: Results --></p>
+            <div v-if="this.isFinished">
+            <span style="font-size: x-large"><b>True Count:</b> {{trueCount}}</span><br>
+            <span style="font-size: x-large"><b>False Count:</b> {{falseCount}}</span>
+            </div>
+            <div v-else>
+              <span style="font-size: large">You can observe the results in this area when you time is over.</span>
+            </div>
           </div>
         </div>
       </div>
@@ -51,18 +65,26 @@
 </template>
 
 <script>
+import wordList from '@/assets/commonWords.json'
+
 export default {
   data () {
     return {
-      words: ['word', 'test', 'third'],
+      words: [],
       writtenWord: null,
       trueCount: 0,
       falseCount: 0,
-      isCorrect: true
+      isCorrect: true,
+      timer: 5,
+      interval: false,
+      isStarted: false,
+      isFinished: false,
+      wordList: wordList
     }
   },
   watch: {
     writtenWord (value) {
+      if (!this.isStarted) this.toggleTimer()
       const trueWord = this.words[0].slice(0, value.length)
       this.isCorrect = trueWord === value.replace(' ', '')
 
@@ -76,6 +98,39 @@ export default {
   computed: {
     checkWrittenWord () {
       return this.isCorrect ? 'selected-word fw-semibold' : 'selected-word fw-semibold bg-danger'
+    }
+  },
+  mounted () {
+    this.setWords()
+  },
+  methods: {
+    shuffle (array) {
+      let counter = array.length
+      let temp
+      let index
+
+      while (counter--) {
+        index = (Math.random() * counter) | 0
+        temp = array[counter]
+        array[counter] = array[index]
+        array[index] = temp
+      }
+
+      return array
+    },
+    toggleTimer () {
+      this.isStarted = true
+      this.interval = setInterval(() => {
+        if (this.timer === 0 || this.timer < 1) {
+          clearInterval(this.interval)
+          this.isFinished = true
+          return
+        }
+        this.timer--
+      }, 1000)
+    },
+    setWords () {
+      this.words = this.shuffle(wordList)
     }
   }
 
