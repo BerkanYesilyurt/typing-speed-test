@@ -1,6 +1,26 @@
-# typing-speed-test
+<p align="center"> 
+<img src="https://github.com/BerkanYesilyurt/typing-speed-test/assets/8729215/29e457ca-0b0a-4332-aa40-3c90ec215d02">
+</p>
 
-## Project setup
+# Typing Speed Test
+One-minute typing speed test to learn how fast you type. Built with Vue 3.
+
+
+## Features
+- Minimal design
+- Results section which including correct, false and total counts
+- Fast switching with space between words
+- New test start without page refresh
+- A thousand most common words
+- Optional refresh of the starting words
+- Time elapsed in seconds
+
+
+## Screenshots
+**Click on the pictures for the original resolution.**
+
+
+## Installation / Project setup
 ```
 npm install
 ```
@@ -20,5 +40,6 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Developer
+Berkan Yeşilyurt    
+berkan38212@gmail.com
