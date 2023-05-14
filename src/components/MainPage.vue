@@ -28,7 +28,7 @@
                 </div>
                 </div>
                 <div v-else>
-                  <button type="button" class="btn btn-primary btn-lg">Start A New Test!</button>
+                  <button type="button" @click="newGame" class="btn btn-primary btn-lg">Start A New Test!</button>
                 </div>
               </div>
           </div>
@@ -84,6 +84,10 @@ export default {
   },
   watch: {
     writtenWord (value) {
+      if (!value || value === ' ') {
+        this.writtenWord = ''
+        return
+      }
       if (!this.isStarted) this.toggleTimer()
       const trueWord = this.words[0].slice(0, value.length)
       this.isCorrect = trueWord === value.replace(' ', '')
@@ -104,6 +108,16 @@ export default {
     this.setWords()
   },
   methods: {
+    newGame () {
+      this.setWords()
+      this.timer = 60
+      this.isCorrect = true
+      this.isFinished = false
+      this.isStarted = false
+      this.trueCount = 0
+      this.falseCount = 0
+      this.writtenWord = ''
+    },
     shuffle (array) {
       let counter = array.length
       let temp
