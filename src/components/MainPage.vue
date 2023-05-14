@@ -49,7 +49,8 @@
             <h2>Results</h2>
             <div v-if="this.isFinished">
             <span style="font-size: x-large"><b>True Count:</b> {{trueCount}}</span><br>
-            <span style="font-size: x-large"><b>False Count:</b> {{falseCount}}</span>
+            <span style="font-size: x-large"><b>False Count:</b> {{falseCount}}</span><br>
+              <span style="font-size: x-large"><b>Total Words:</b> {{trueCount + falseCount}}</span>
             </div>
             <div v-else>
               <span style="font-size: large">You can observe the results in this area when you time is over.</span>
