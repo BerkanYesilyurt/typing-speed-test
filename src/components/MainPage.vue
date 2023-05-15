@@ -17,7 +17,7 @@
                 <div v-if="!isFinished">
                 <div class="row g-0 text-center p-2 mb-4" style="background-color: #ced4da">
                   <div class="col-sm-6 col-md-12 display-6 p-3">
-                    <span class="m-lg-2" v-for="(word,key) in words.filter((data, index) => index<7)" :key="key" v-bind:class="key!==0 || checkWrittenWord">
+                    <span class="m-lg-2" v-for="(word,key) in filteredWords" :key="key" v-bind:class="key!==0 || checkWrittenWord">
                       {{word}}
                     </span></div>
                 </div>
@@ -97,12 +97,16 @@ export default {
         this.isCorrect ? this.trueCount++ : this.falseCount++
         this.words.splice(0, 1)
         this.writtenWord = ''
+        this.isCorrect = true
       }
     }
   },
   computed: {
     checkWrittenWord () {
       return this.isCorrect ? 'selected-word fw-semibold' : 'selected-word fw-semibold bg-danger'
+    },
+    filteredWords () {
+      return this.words.filter((data, index) => index < 7)
     }
   },
   mounted () {
