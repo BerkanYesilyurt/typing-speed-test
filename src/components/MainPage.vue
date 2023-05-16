@@ -76,7 +76,7 @@ export default {
       trueCount: 0,
       falseCount: 0,
       isCorrect: true,
-      timer: 5,
+      timer: 60,
       interval: false,
       isStarted: false,
       isFinished: false,
