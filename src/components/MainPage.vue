@@ -27,36 +27,17 @@
                   <button :disabled="this.isStarted" type="button" class="input-group-lg btn btn-primary" @click="setWords">Reload</button>
                 </div>
                 </div>
-                <div v-else>
-                  <button type="button" @click="newGame" class="btn btn-primary btn-lg">Start A New Test!</button>
+                <div v-else><br>
+                  <h2>Results</h2>
+                    <span style="font-size: x-large"><b>True Count:</b> {{trueCount}}</span><br>
+                    <span style="font-size: x-large"><b>False Count:</b> {{falseCount}}</span><br>
+                    <span style="font-size: x-large"><b>Total Words:</b> {{trueCount + falseCount}}</span><br><br>
+                  <button type="button" @click="newGame" class="btn btn-primary btn-lg mt-1">Start A New Test!</button>
                 </div>
               </div>
           </div>
         </div>
         </center>
-      </div>
-
-      <div class="row align-items-md-stretch">
-        <div class="col-md-6">
-          <div class="h-100 p-5 text-bg-dark rounded-3">
-            <h2>Change the background</h2>
-            <p>Swap the background-color utility and add a `.text-*` color utility to mix up the jumbotron look. Then, mix and match with additional component themes and more.</p>
-            <button class="btn btn-outline-light" type="button">Example button</button>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="h-100 p-5 bg-body-tertiary border rounded-3">
-            <h2>Results</h2>
-            <div v-if="this.isFinished">
-            <span style="font-size: x-large"><b>True Count:</b> {{trueCount}}</span><br>
-            <span style="font-size: x-large"><b>False Count:</b> {{falseCount}}</span><br>
-              <span style="font-size: x-large"><b>Total Words:</b> {{trueCount + falseCount}}</span>
-            </div>
-            <div v-else>
-              <span style="font-size: large">You can observe the results in this area when you time is over.</span>
-            </div>
-          </div>
-        </div>
       </div>
 
       <footer class="pt-3 mt-4 text-body-secondary border-top">
