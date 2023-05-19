@@ -104,20 +104,6 @@ export default {
       this.falseCount = 0
       this.writtenWord = ''
     },
-    shuffle (array) {
-      let counter = array.length
-      let temp
-      let index
-
-      while (counter--) {
-        index = (Math.random() * counter) | 0
-        temp = array[counter]
-        array[counter] = array[index]
-        array[index] = temp
-      }
-
-      return array
-    },
     toggleTimer () {
       this.isStarted = true
       this.interval = setInterval(() => {
@@ -130,7 +116,7 @@ export default {
       }, 1000)
     },
     setWords () {
-      this.words = this.shuffle(wordList)
+      this.words = this.wordList.sort(() => Math.random() - 0.5)
     }
   }
 
