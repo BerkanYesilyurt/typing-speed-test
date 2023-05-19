@@ -23,7 +23,7 @@ One-minute typing speed test to learn how fast you type. Built with Vue 3.
 ![image](https://github.com/BerkanYesilyurt/typing-speed-test/assets/8729215/cebd92d2-0ace-47f1-afc6-f84cc4dc9085)
 
 #### Results
-
+![image](https://github.com/BerkanYesilyurt/typing-speed-test/assets/8729215/39bc02e7-6418-4d79-8727-478ded5c910a)
 
 
 ## Installation / Project setup
