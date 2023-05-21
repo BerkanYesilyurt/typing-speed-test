@@ -29,9 +29,10 @@
                 </div>
                 <div v-else><br>
                   <h2>Results</h2>
-                    <span style="font-size: x-large"><b>True Count:</b> {{trueCount}}</span><br>
-                    <span style="font-size: x-large"><b>False Count:</b> {{falseCount}}</span><br>
-                    <span style="font-size: x-large"><b>Total Words:</b> {{trueCount + falseCount}}</span><br><br>
+                    <div style="font-size: x-large"><b>True Count:</b> {{trueCount}}<br>
+                    <b>False Count:</b> {{falseCount}}<br>
+                    <b>Total Words:</b> {{trueCount + falseCount}}<br>
+                    <b>Accuracy:</b> {{accuracyPercentage}}%</div><br>
                   <button type="button" @click="newGame" class="btn btn-primary btn-lg mt-1">Start A New Test!</button>
                 </div>
               </div>
@@ -88,6 +89,9 @@ export default {
     },
     filteredWords () {
       return this.words.filter((data, index) => index < 7)
+    },
+    accuracyPercentage () {
+      return (100 / (this.trueCount + this.falseCount) * this.trueCount).toFixed(1)
     }
   },
   mounted () {
